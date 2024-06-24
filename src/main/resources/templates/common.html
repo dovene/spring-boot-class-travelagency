@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head id="header">
+    <meta charset="utf-8" />
+    <title>Agence de voyages</title>
+    <link rel="stylesheet" href="../../css/bootstrap.min.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="menu">
+        <a class="navbar-brand" href="#">Gestion scolaire</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/city/list">Villes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/plane/list">Avions</a>
+            </li>
+          </ul>
+        </div>
+    </nav>
+    <div id="js-script">
+      <script src="../../js/bootstrap.min.js"></script>
+      <script src="../../js/jquery-3.7.1.min.js"></script>     
+      <script type="text/javascript">
+        $(document).ready(function() {
+           $('li.active').removeClass('active').removeAttr('aria-current');
+           $('a[href="' + location.pathname + '"]').closest('li').addClass('active').attr('aria-current', 'page'); 
+         });
+      </script>
+    </div>
+  </body>
+</html>
