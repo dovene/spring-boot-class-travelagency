@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{common.html :: #header}">
+<body>
+<div th:replace="common.html :: #menu"></div>
+<div class="container">
+	
+	<div class="row">
+		<h2>Ajout de vol</h2>
+	</div>
+
+	<div class="row">
+		<form th:action="@{/flight/add}" th:object="${flight}" method="post" class="form-horizontal" style="width: 100%">
+			<div class="form-group">
+				<label for="flight">Numéro du vol</label>
+				<div>
+					<input type="text" th:field="*{flightNumber}" id="flightNumber" placeholder="Numéro de vol" class="col-4">
+	
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label for="plane">Choisir l'avion </label>
+				<div>
+					<select class="form-select" th:field="*{plane}" id="plane">
+						<option th:each="plane : ${planes}"
+								th:value="${plane.id}"
+								th:text="${plane.name}"/>
+					</select>
+				</div>
+				
+			</div>
+			
+			<div class="form-group">
+				<label for="departureCity">Choisir la ville de départ</label>
+				<div>
+					<select class="form-select" th:field="*{departureCity}" id="departureCity">
+						<option th:each="departureCity : ${cities}"
+								th:value="${departureCity.id}"
+								th:text="${departureCity.name}"/>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="arrivalCity">Choisir la ville de d'arrivée</label>
+				<div>
+					<select class="form-select" th:field="*{arrivalCity}" id="arrivalCity">
+						<option th:each="arrivalCity : ${cities}"
+								th:value="${arrivalCity.id}"
+								th:text="${arrivalCity.name}"/>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="departureTime">Date de départ</label>
+				<div>
+					<input type="datetime-local" th:field="*{departureTime}" id="departureTime" class="col-4" required>
+						
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="arrivalTime">Date d'arrivée</label>
+				<div>
+					<input type="datetime-local" th:field="*{arrivalTime}" id="arrivalTime" class="col-4" required>
+						
+				</div>
+			</div>
+
+
+			<div class="form-group">
+				<div>
+					<a class="btn btn-danger btn-sm" href="/flight/list">Annuler</a>
+					<input class="btn btn-primary btn-sm" type="submit" value="Enregistrer">
+				</div>
+			</div>
+
+		</form>
+	</div>
+
+</div>
+</body>
+</html>

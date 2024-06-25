@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{common.html :: #header}">
+</head>
+<body>
+<div th:replace="common.html :: #menu"></div>
+<div class="container">
+	<div class="row"><h2>Liste des vols</h2></div>
+	<div class="row col-md-10">
+		<p> <a href="/flight/add" class="btn btn-primary btn-sm">Ajouter un vol</a> 
+		<a href="/flight/sorted" class="btn btn-primary btn-sm">Afficher les vols triés par avion</a></p>
+
+	
+
+
+		<table class="table table-bordered table-sm">
+			<thead>
+				<tr>
+					<th>Numéro de vol</th>
+					<th>Avion</th>
+					<th>Ville de départ</th>
+					<th>Ville d'arrivée</th>
+					<th>Date de départ</th>
+					<th>Date d'arrivée</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="flight : ${flights}">
+					<td th:text="${flight.flightNumber}"></td>
+					<td th:text="${flight.plane.name}"></td>
+					<td th:text="${flight.departureCity.name}"></td>
+					<td th:text="${flight.arrivalCity.name}"></td>
+					<td th:text="${flight.departureTime}"></td>
+					<td th:text="${flight.arrivalTime}"></td>
+					<td>
+						<a th:href="@{/flight/update/{id}(id=${flight.flightNumber})}"><button class="btn btn-info">Modifier</button></a>
+						<a th:href="@{/flight/delete/{id}(id=${flight.flightNumber})}"><button class="btn btn-danger">Supprimer</button></a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<p>
+        <form action="/flight/city" method="get">
+            <label for="cityId">Ville:</label>
+            <select id="cityId" name="cityId" required>
+                <option th:each="city : ${cities}" th:value="${city.id}" th:text="${city.name}"></option>
+            </select>
+			<input class="btn btn-primary btn-sm" type="submit" value="Afficher les vols filtrés par ville">
+        </form>
+		</p>
+		
+        <form action="/flight/period" method="get">
+            <label for="start">Date de début:</label>
+            <input type="datetime-local" id="start" name="start" required>
+            <label for="end">Date de fin:</label>
+            <input type="datetime-local" id="end" name="end" required>
+			<input class="btn btn-primary btn-sm" type="submit" value="Afficher les vols filtrés par période">
+        </form>
+
+	</div>
+</div>
+<div th:replace="common.html :: #js-script"></div>
+</body>
+</html>
